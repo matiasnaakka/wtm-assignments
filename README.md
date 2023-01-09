@@ -1,4 +1,6 @@
-# WTMP Starter
+# WTMP Starter examples
+
+Check different branches for different assignments
 
 Simple boilerplate for [Webpack](https://webpack.js.org/guides/getting-started) powered web development exercises.
 
