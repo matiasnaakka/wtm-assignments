@@ -1,14 +1,85 @@
 <!DOCTYPE html>
-<html>
+<html lang="Fi">
   <head>
-    <meta charset="utf-8"/>
-    <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="assets/styles.css">
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="assets/styles.css" />
+    <script
+      src="https://kit.fontawesome.com/c02d3fc986.js"
+      crossorigin="anonymous"
+      defer
+    ></script>
+
+    <title>Document</title>
   </head>
   <body>
-    <p>
-      Hello! Open the developer tools, please.<br />
-      Start by editing the files in <code>src/</code> folder.
-    </p>
+    <header>
+      <nav>
+        <ul>
+          <li><a href="#">Etusivu</a></li>
+          <li><a href="#">Ruokalistat</a></li>
+          <li><a href="#">Ravintolat</a></li>
+          <li><a href="#">Yhteystiedot</a></li>
+          <button id="englishMenuBtn">English</button>
+          <button id="finnishMenuBtn">Suomi</button>
+          <button  id="alphapeticalBtn">alphapetically</button>
+          <button id="randomDishBtn">Random dish</button>
+        </ul>
+      </nav>
+      <input type="search" placeholder="Hae ravintolan nimellä" />
+    </header>
+
+    <div id="showcase">
+      <div id="left"><h1>Lounari.</h1>
+        <p>Missä tänään syötäisiin</p></div>
+      <div id="right"></div>
+
+    </div>
+    <main>
+      <!-- flex -->
+      <div class="info-area">
+        <div id="info-text">
+          <h3>
+            Missä tänään syötäisiin? Tuttu tarina ennen lounashetkeä palvelu
+            etsii lähelläsi olevat lounaspaikat, sekä näyttää niiden
+            päivittäisen lounaslistan. Viikottaiset lounaslistat ovat myös
+            käytettävissäsi. Pääset niihin klikkaamalla ravintolan logoa.
+          </h3>
+        </div>
+      </div>
+      <div class="restaurant-area">
+        <div class="item item1">
+          <div class="restaurant_container">
+            <div class="picture">
+              <img src="./assets/img/sodexo.png" alt="" />
+            </div>
+            <div class="restaurant">
+              <h4>Ruokalista1</h4>
+              <p class="dish"></p>
+            </div>
+            <div class="location">
+              <i class="fa-solid fa-location-dot"></i> 100m
+            </div>
+          </div>
+        </div>
+        <div class="item item2">
+          <div class="restaurant_container">
+            <div class="picture">
+              <img src="./assets/img/sodexo.png" alt="sodexo" />
+            </div>
+            <div class="restaurant">
+              <h4>Ruokalista2</h4>
+              <p class="dish"></p>
+            </div>
+            <div class="location">
+              <i class="fa-solid fa-location-dot"></i> 100m
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+     <footer></footer>
+    </div>
   </body>
 </html>
