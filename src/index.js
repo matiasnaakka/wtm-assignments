@@ -1,6 +1,18 @@
 let language = "fi";
 let sorting = "";
 
+import Menu from "./menu.json";
+Menu.courses.map((cources) => {
+  return course.title_en;
+});
+
+const coursesEn = Object.values(Menu.courses).map((course) => course.title_en);
+const coursesFi = Object.values(Menu.courses).map((course) => course.title_fi);
+
+
+
+console.log('dataa ja kamaa ' + Menu.courses);
+
 const enhMenuBtn = document.querySelector("#englishMenuBtn");
 const fiMenuBtn = document.querySelector("#finnishMenuBtn");
 const alphapeticalBtn = document.querySelector("#alphapeticalBtn");
