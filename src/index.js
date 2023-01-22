@@ -1,74 +1,78 @@
-console.log('Toimii kuin junan vessa eikös niin!');
-let language = "fi";
-let sorting = "";
-
-import sodexo from "./assets/modules/sodexo-data";
-
-let activeMenu = sodexo.coursesFi
+import Sodexo from './modules/sodexo-data';
+import Fazer from './modules/fazer.data';
 
 
-console.log('dataa ja kamaa ' + Menu.courses);
+let lang = 'fi';
+let menuContainers = [];
+let activeMenus = [];
 
-const enhMenuBtn = document.querySelector("#englishMenuBtn");
-const fiMenuBtn = document.querySelector("#finnishMenuBtn");
-const alphapeticalBtn = document.querySelector("#alphapeticalBtn");
-const randomDishBtn = document.querySelector("#randomDishBtn");
-
-/* const cources = {
-  en: [
-    "Hamburger, cream sauce and poiled potates",
-    "Goan style fish curry and whole grain rice",
-    "Vegan Chili sin carne and whole grain rice",
-    "Broccoli puree soup, side salad with two napas",
-    "Lunch baguette with BBQ-turkey filling",
-    "Cheese / Chicken / Vege / Halloum burger and french fries",
-  ],
-  fi: [
-    "Jauhelihapihvi, ruskeaa kermakastiketta ja keitettyä perunaa",
-    "Goalaista kalacurrya ja täysjyväriisiä",
-    "vegaani Chili sin carne ja täysjyväriisi",
-    "Parsakeittoa,lisäkesalaatti kahdella napaksella",
-    "Lunch baguette with BBQ-turkey filling",
-    "Juusto / Kana / Kasvis / Halloumi burgeri ja ranskalaiset",
-  ],
-}; */
-
-const renderMenu = () => {
-  let courcesAsHtml = cources[language].map((menu) => `<p>${menu}</p>`);
-  if (sorting === "asc") {
-    courcesAsHtml = courcesAsHtml.sort();
-  } else if (sorting === "desc") {
-    courcesAsHtml = courcesAsHtml.sort().reverse();
+const renderMenu = (menu, targetElem) => {
+  const menuContainer = targetElem;
+  menuContainer.innerHTML = '';
+  const list = document.createElement('ul');
+  for (const dish of menu) {
+    const li = document.createElement('li');
+    li.textContent = dish;
+    list.append(li);
   }
-  Array.from(document.querySelectorAll(".dish")).forEach(
-    (dish) => (dish.innerHTML = courcesAsHtml.join(""))
-  );
+  menuContainer.append(list);
 };
 
-renderMenu();
+const sortMenu = (menu, order = 'asc') => {
 
-const englishMenu = () => {
-  language = "en";
-  renderMenu();
+  menu = [...menu];
+  menu.sort();
+  if (order === 'desc') {
+    menu.reverse();
+  }
+  return menu;
 };
 
-const finnishMenu = () => {
-  language = "fi";
-  renderMenu();
+
+const changeLanguage = (language) => {
+  if (language === 'fi') {
+    activeMenus[0] = Sodexo.coursesFi;
+    activeMenus[1] = Fazer.coursesFi;
+  } else if (language === 'en') {
+    activeMenus[0] = Sodexo.coursesEn;
+    activeMenus[1] = Fazer.coursesEn;
+  }
+  lang = language;
+  // TODO: implement & use generic renderAll() function??
+  for (const [index, menu] of activeMenus.entries()) {
+    renderMenu(menu, menuContainers[index]);
+  }
 };
 
-const sortMenu = () => {
-  sorting = sorting === "asc" ? "desc" : "asc";
-  renderMenu();
+
+const getRandomDish = (menu) => {
+  const randomIndex = Math.floor(Math.random() * menu.length);
+  return menu[randomIndex];
 };
 
-const getRandomDish = () => {
-  let randomDish = Math.floor(Math.random() * cources[language].length);
-  alert(cources[language][randomDish]);
-  console.log(cources[language][randomDish]);
-};
 
-enhMenuBtn.addEventListener("click", englishMenu);
-fiMenuBtn.addEventListener("click", finnishMenu);
-alphapeticalBtn.addEventListener("click", sortMenu);
-randomDishBtn.addEventListener("click", getRandomDish);
+const sortButton = document.querySelector('#sort-button');
+sortButton.addEventListener('click', () => {
+  renderMenu(sortMenu(activeMenus[0]));
+});
+const langButton = document.querySelector('#lang-button');
+langButton.addEventListener('click', () => {
+  if (lang === 'fi') {
+    changeLanguage('en');
+  } else {
+    changeLanguage('fi');
+  }
+});
+const randButton = document.querySelector('#rand-button');
+randButton.addEventListener('click', () => {
+  alert(getRandomDish(activeMenus[0]));
+});
+
+const init = () => {
+  activeMenus = [Sodexo.coursesFi, Fazer.coursesFi];
+  menuContainers = document.querySelectorAll('.menu-container');
+  for (const [index, menu] of activeMenus.entries()) {
+    renderMenu(menu, menuContainers[index]);
+  }
+};
+init();
