@@ -1,16 +1,418 @@
 <!DOCTYPE html>
-<html>
+<html lang="Fi">
   <head>
-    <meta charset="utf-8"/>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" type="styles" href="src/assets/styles.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700&family=Roboto+Slab:wght@400;800&display=swap" rel="stylesheet">
     <title><%= htmlWebpackPlugin.options.title %></title>
-    <link rel="stylesheet" href="assets/styles.css">
+<style>
+  * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+:root {
+  --nav: #940e3f;
+  --showcase: #43e04f;
+  --text1: #343a40;
+  --footer: #1d9426;
+  --itembackground: #d9d9d9;
+  --black-color: #000;
+  --additional-color-light-green: #65ff71;
+  --additional-color-red: #e0437c;
+}
+
+
+/* En saanut font-facea toimimaan selaimessa */
+/* @font-face {
+  font-family: latoRegular;
+  src: url("/assets/fonts/Lato/Lato-Regular.ttf");
+}
+@font-face {
+  font-family: latoBold;
+  src: url("/assets/fonts/Lato/Lato-Bold.ttf");
+}
+
+@font-face {
+  font-family: RobotoSlabRegular;
+  src: url("/assets/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf");
+} */
+
+body {
+  font-family: 'Lato', sans-serif;
+  font-size: 1em;
+}
+
+nav {
+  display: flex;
+  position: sticky;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  top: 0;
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  align-content: center;
+}
+nav ul {
+  display: flex;
+  text-decoration: none;
+}
+li {
+  list-style-type: none;
+}
+#search {
+  background: url("https://users.metropolia.fi/~matian/Web-teknologiatjamedia-alustat/lounas-sivusto-week2/assets/img/noun_Search_781957.svg") no-repeat scroll 3px 3px;
+  padding-left: 30px;
+}
+#logo-text {
+  font-size: 60px;
+  font-weight: 800;
+}
+#slogan {
+  font-size: 23px;
+  font-weight: 400;
+}
+.nav-link {
+  text-decoration: none;
+  color: var(--nav);
+  margin-left: 1.5em;
+}
+a:hover {
+  color: hsla(338, 83%, 32%, 0.432);
+}
+input[type="text"] {
+  margin-left: 16rem;
+  border-color: var(--nav);
+  padding: 0.5em 16vh;
+  border-radius: 9px;
+}
+
+div#showcase {
+  font-family:  'Roboto Slab', serif;
+  display: flex;
+  background-color: var(--showcase);
+  height: 30vh;
+  max-width: 85%;
+  margin: auto;
+  color: #fff;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+div#info-text {
+  text-align: center;
+  max-width: 75%;
+  width: 147vh;
+  margin: auto;
+  padding: 3vh 1vh;
+}
+.restaurant-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-column-gap: 2rem;
+  grid-gap: 2em;
+  max-width: 80%;
+  margin: auto;
+}
+.items-container {
+  display: grid;
+  grid-template-columns: minmax(3rem, 5rem) 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.item {
+  border: 1px solid var(--black-color);
+  border-radius: 3px;
+  background-color: var(--itembackground);
+}
+.restaurant-header {
+  display: flex;
+  align-items: center;
+}
+p.dish {
+  font-size: 10px;
+}
+footer {
+  background-color: var(--footer);
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 4.5rem;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+}
+.location-icon svg {
+  display: block;
+  height: 26px;
+  margin-left: 7px;
+}
+p {
+  font-weight: 10px;
+}
+.location-icon svg:hover {
+  fill: var(--showcase);
+}
+.location-icon-icon:hover {
+  filter: var(--showcase);
+}
+#right {
+  width: 46vw;
+  height: 30vh;
+  margin-left: auto;
+  background: url("https://users.metropolia.fi/~matian/Web-teknologiatjamedia-alustat/lounas-sivusto-week2/assets/img/black-frying-pan-with-spaghetti-sauce-near-brown-wooden-691114%20(1).webp")
+    center/cover no-repeat;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 24% 100%);
+}
+#left {
+  margin-left: 9em;
+}
+.sodexo-img {
+  width: 100%;
+  height: auto;
+}
+.addrestaurant {
+  text-align: center;
+}
+#add-icon svg {
+  display: block;
+  width: 31px;
+  height: 27px;
+}
+.add-restaurant-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.add-restaurant-link:hover {
+color: #e0437c;
+
+}
+
+.restaurant-header h4 {
+  font-size: 16px;
+  font-family: 'Lato', sans-serif;
+}
+
+.menu-container {
+  font-size: 17px;
+  font-family: 'Lato', sans-serif;
+}
+
+
+p#footer-text {
+  color: var(--text1);
+}
+</style>
   </head>
   <body>
-    <h1>Ruokalista</h1>
-    <div class="menu-container"></div>
-    <div class="menu-container"></div>
-    <button id="sort-button">Sort</button>
-    <button id="lang-button">FI/EN</button>
-    <button id="rand-button">Pick a random</button>
+    <header>
+      <nav>
+        <ul>
+          <li><a class="nav-link" href="#">Etusivu</a></li>
+          <li><a class="nav-link" href="#">Ruokalistat</a></li>
+          <li><a class="nav-link" href="#">Ravintolat</a></li>
+          <li><a class="nav-link" href="#">Yhteystiedot</a></li>
+          <button id="sort-button">Sort</button>
+          <button id="lang-button">FI/EN</button>
+          <button id="rand-button">Pick a random</button>
+          <form id="search-form">
+            <input
+              id="search"
+              alt="search"
+              type="text"
+              placeholder="Etsi nimellä..."
+            />
+          </form>
+        </ul>
+      </nav>
+    </header>
+    <div id="showcase">
+      <div id="left">
+        <h1 id="logo-text">Lounari.</h1>
+        <p id="slogan">Missä tänään syötäisiin</p>
+      </div>
+      <div id="right"></div>
+    </div>
+    <main>
+      <div class="info-area">
+        <div id="info-text">
+          <h3 >
+            Missä tänään syötäisiin? Tuttu tarina ennen lounashetkeä palvelu
+            etsii lähelläsi olevat lounaspaikat, sekä näyttää niiden
+            päivittäisen lounaslistan. Viikottaiset lounaslistat ovat myös
+            käytettävissäsi. Pääset niihin klikkaamalla ravintolan logoa.
+          </h3>
+        </div>
+      </div>
+      <div class="restaurant-area">
+        <div class="item items-container item1">
+          <div class="picture">
+            <img
+              class="sodexo-img"
+              src="./assets/img/sodexo.png"
+              alt="sodexo"
+            />
+          </div>
+          <div class="restaurant">
+            <div class="restaurant-header"><h4>Ruokalista1</h4>
+              <div class="location-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  version="1.1"
+                  viewBox="0 0 48 60"
+                  xml:space="preserve">
+                    <g>
+                      <path d="M9,18c0,7.98,13.63,25.85,14.21,26.61C23.4,44.85,23.69,45,24,45s0.6-0.15,0.79-0.39C25.37,43.85,39,25.98,39,18   c0-8.27-6.73-15-15-15S9,9.73,9,18z M37,18c0,6.27-10.06,20.36-13,24.33C21.06,38.36,11,24.27,11,18c0-7.17,5.83-13,13-13   S37,10.83,37,18z"/>
+                      <path d="M14,18c0,5.51,4.49,10,10,10s10-4.49,10-10S29.51,8,24,8S14,12.49,14,18z M32,18c0,4.41-3.59,8-8,8s-8-3.59-8-8s3.59-8,8-8   S32,13.59,32,18z"/>
+                    </g>
+                  </svg>
+              </div>
+            </div>
+            <p class="distance-text">100m</p>
+            <p class="menu-container">
+              Jauhelihapihvi, ruskeaa kermakastiketta ja keitettyä perunaa,
+              Goalaista kalacurrya ja täysjyväriisiä, vegaani Chili sin carne ja
+              täysjyväriisi, Parsakeittoa,lisäkesalaatti kahdella napaksella,
+              Lunch baguette with BBQ-turkey filling, Juusto / Kana / Kasvis /
+              Halloumi burgeri ja ranskalaiset
+            </p>
+          </div>
+        </div>
+        <div class="item items-container item2">
+          <div class="picture">
+            <img
+              class="sodexo-img"
+              src="./assets/img/sodexo.png"
+              alt="sodexo"
+            />
+          </div>
+          <div class="restaurant">
+            <div class="restaurant-header"><h4>Ruokalista2</h4>
+              <div class="location-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  version="1.1"
+                  viewBox="0 0 48 60"
+                  xml:space="preserve">
+                    <g>
+                      <path d="M9,18c0,7.98,13.63,25.85,14.21,26.61C23.4,44.85,23.69,45,24,45s0.6-0.15,0.79-0.39C25.37,43.85,39,25.98,39,18   c0-8.27-6.73-15-15-15S9,9.73,9,18z M37,18c0,6.27-10.06,20.36-13,24.33C21.06,38.36,11,24.27,11,18c0-7.17,5.83-13,13-13   S37,10.83,37,18z"/>
+                      <path d="M14,18c0,5.51,4.49,10,10,10s10-4.49,10-10S29.51,8,24,8S14,12.49,14,18z M32,18c0,4.41-3.59,8-8,8s-8-3.59-8-8s3.59-8,8-8   S32,13.59,32,18z"/>
+                    </g>
+                  </svg>
+              </div>
+            </div>
+            <p class="distance-text">100m</p>
+            <p class="menu-container">
+              Jauhelihapihvi, ruskeaa kermakastiketta ja keitettyä perunaa,
+              Goalaista kalacurrya ja täysjyväriisiä, vegaani Chili sin carne ja
+              täysjyväriisi, Parsakeittoa,lisäkesalaatti kahdella napaksella,
+              Lunch baguette with BBQ-turkey filling, Juusto / Kana / Kasvis /
+              Halloumi burgeri ja ranskalaiset
+            </p>
+          </div>
+        </div>
+        <div class="item items-container item3">
+          <div class="picture">
+            <img
+              class="sodexo-img"
+              src="./assets/img/sodexo.png"
+              alt="sodexo"
+            />
+          </div>
+          <div class="restaurant">
+            <div class="restaurant-header"><h4>Ruokalista3</h4>
+              <div class="location-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  version="1.1"
+                  viewBox="0 0 48 60"
+                  xml:space="preserve">
+                    <g>
+                      <path d="M9,18c0,7.98,13.63,25.85,14.21,26.61C23.4,44.85,23.69,45,24,45s0.6-0.15,0.79-0.39C25.37,43.85,39,25.98,39,18   c0-8.27-6.73-15-15-15S9,9.73,9,18z M37,18c0,6.27-10.06,20.36-13,24.33C21.06,38.36,11,24.27,11,18c0-7.17,5.83-13,13-13   S37,10.83,37,18z"/>
+                      <path d="M14,18c0,5.51,4.49,10,10,10s10-4.49,10-10S29.51,8,24,8S14,12.49,14,18z M32,18c0,4.41-3.59,8-8,8s-8-3.59-8-8s3.59-8,8-8   S32,13.59,32,18z"/>
+                    </g>
+                  </svg>
+              </div>
+            </div>
+            <p class="distance-text">100m</p>
+            <p class="menu-container">
+              Jauhelihapihvi, ruskeaa kermakastiketta ja keitettyä perunaa,
+              Goalaista kalacurrya ja täysjyväriisiä, vegaani Chili sin carne ja
+              täysjyväriisi, Parsakeittoa,lisäkesalaatti kahdella napaksella,
+              Lunch baguette with BBQ-turkey filling, Juusto / Kana / Kasvis /
+              Halloumi burgeri ja ranskalaiset
+            </p>
+          </div>
+        </div>
+        <div class="item items-container item4">
+          <div class="picture">
+            <img
+              class="sodexo-img"
+              src="./assets/img/sodexo.png"
+              alt="sodexo"
+            />
+          </div>
+          <div class="restaurant">
+            <div class="restaurant-header"><h4>Ruokalista4</h4>
+              <div class="location-icon">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  xmlns:xlink="http://www.w3.org/1999/xlink"
+                  version="1.1"
+                  viewBox="0 0 48 60"
+                  xml:space="preserve">
+                    <g>
+                      <path d="M9,18c0,7.98,13.63,25.85,14.21,26.61C23.4,44.85,23.69,45,24,45s0.6-0.15,0.79-0.39C25.37,43.85,39,25.98,39,18   c0-8.27-6.73-15-15-15S9,9.73,9,18z M37,18c0,6.27-10.06,20.36-13,24.33C21.06,38.36,11,24.27,11,18c0-7.17,5.83-13,13-13   S37,10.83,37,18z"/>
+                      <path d="M14,18c0,5.51,4.49,10,10,10s10-4.49,10-10S29.51,8,24,8S14,12.49,14,18z M32,18c0,4.41-3.59,8-8,8s-8-3.59-8-8s3.59-8,8-8   S32,13.59,32,18z"/>
+                    </g>
+                  </svg>
+              </div>
+            </div>
+            <p class="distance-text">100m</p>
+            <p class="menu-container">
+              Jauhelihapihvi, ruskeaa kermakastiketta ja keitettyä perunaa,
+              Goalaista kalacurrya ja täysjyväriisiä, vegaani Chili sin carne ja
+              täysjyväriisi, Parsakeittoa,lisäkesalaatti kahdella napaksella,
+              Lunch baguette with BBQ-turkey filling, Juusto / Kana / Kasvis /
+              Halloumi burgeri ja ranskalaiset
+            </p>
+          </div>
+        </div>
+        <div class="item items-container addrestaurant">
+          <div id="add-icon">
+            <svg
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+            version="1.1"
+            viewBox="0 0 128 160"
+            xml:space="preserve">
+            <g>
+              <path d="M64,1L64,1C29.2,1,1,29.2,1,64s28.2,63,63,63h0c34.8,0,63-28.2,63-63S98.8,1,64,1z M94,69H69v25H59V69H34V59h25V34h10v25   h25V69z"/>
+            </g>
+          </svg>
+          </div>
+          <div class="restaurant"><a class="add-restaurant-link" href="#"><p >Lisää uusi lista </p></a>
+          </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    <footer><p id="footer-text">@Matias Naakka</p></footer>
   </body>
 </html>
+

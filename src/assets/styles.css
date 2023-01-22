@@ -1,3 +1,207 @@
-body {
-  margin: 10%;
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
 }
+:root {
+  --nav: #940e3f;
+  --showcase: #43e04f;
+  --text1: #343a40;
+  --footer: #1d9426;
+  --itembackground: #d9d9d9;
+  --black-color: #000;
+  --additional-color-light-green: #65ff71;
+  --additional-color-red: #e0437c;
+}
+
+@font-face {
+  font-family: latoRegular;
+  src: url("/assets/fonts/Lato/Lato-Regular.ttf");
+}
+@font-face {
+  font-family: latoBold;
+  src: url("/assets/fonts/Lato/Lato-Bold.ttf");
+}
+
+@font-face {
+  font-family: RobotoSlabRegular;
+  src: url("/assets/fonts/Roboto_Slab/RobotoSlab-VariableFont_wght.ttf");
+}
+
+body {
+  font-family: latoRegular;
+  font-size: 1em;
+}
+
+nav {
+  display: flex;
+  position: sticky;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  top: 0;
+  list-style-type: none;
+  justify-content: center;
+  align-items: center;
+  z-index: 1;
+  font-weight: 700;
+  font-size: 1.2rem;
+  padding: 1.5rem;
+  align-content: center;
+}
+nav ul {
+  display: flex;
+  text-decoration: none;
+}
+li {
+  list-style-type: none;
+}
+#search {
+  background: url("https://users.metropolia.fi/~matian/Web-teknologiatjamedia-alustat/lounas-sivusto-week2/assets/img/noun_Search_781957.svg") no-repeat scroll 3px 3px;
+  padding-left: 30px;
+}
+#logo-text {
+  font-size: 60px;
+  font-weight: 800;
+}
+#slogan {
+  font-size: 23px;
+  font-weight: 400;
+}
+.nav-link {
+  text-decoration: none;
+  color: var(--nav);
+  margin-left: 1.5em;
+}
+a:hover {
+  color: hsla(338, 83%, 32%, 0.432);
+}
+input[type="text"] {
+  margin-left: 16rem;
+  border-color: var(--nav);
+  padding: 0.5em 16vh;
+  border-radius: 9px;
+}
+
+
+div#showcase {
+  font-family: RobotoSlabRegular;
+  display: flex;
+  background-color: var(--showcase);
+  height: 30vh;
+  max-width: 85%;
+  margin: auto;
+  color: #fff;
+  text-align: center;
+  align-items: center;
+  justify-content: space-between;
+}
+div#info-text {
+  text-align: center;
+  max-width: 75%;
+  width: 147vh;
+  margin: auto;
+  padding: 3vh 1vh;
+}
+.restaurant-area {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto;
+  grid-column-gap: 2rem;
+  grid-gap: 2em;
+  max-width: 80%;
+  margin: auto;
+}
+.items-container {
+  display: grid;
+  grid-template-columns: minmax(3rem, 5rem) 1fr;
+  gap: 0.5rem;
+  padding: 0.5rem;
+}
+.item {
+  border: 1px solid var(--black-color);
+  border-radius: 3px;
+  background-color: var(--itembackground);
+}
+.restaurant-header {
+  display: flex;
+  align-items: center;
+}
+p.dish {
+  font-size: 10px;
+}
+footer {
+  background-color: var(--footer);
+  display: flex;
+  position: absolute;
+  width: 100%;
+  height: 4.5rem;
+  align-content: center;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2vh;
+}
+.location-icon svg {
+  display: block;
+  height: 26px;
+  margin-left: 7px;
+}
+p {
+  font-weight: 10px;
+}
+.location-icon svg:hover {
+  fill: var(--showcase);
+}
+.location-icon-icon:hover {
+  filter: var(--showcase);
+}
+#right {
+  width: 46vw;
+  height: 30vh;
+  margin-left: auto;
+  background: url("https://users.metropolia.fi/~matian/Web-teknologiatjamedia-alustat/lounas-sivusto-week2/assets/img/black-frying-pan-with-spaghetti-sauce-near-brown-wooden-691114%20(1).webp")
+    center/cover no-repeat;
+  clip-path: polygon(0 0, 100% 0%, 100% 100%, 24% 100%);
+}
+#left {
+  margin-left: 9em;
+}
+.sodexo-img {
+  width: 100%;
+  height: auto;
+}
+.addrestaurant {
+  text-align: center;
+}
+#add-icon svg {
+  display: block;
+  width: 31px;
+  height: 27px;
+}
+.add-restaurant-link {
+  text-decoration: none;
+  color: #000;
+}
+
+.add-restaurant-link:hover {
+color: #e0437c;
+
+}
+
+.restaurant-header h4 {
+  font-size: 16px;
+  font-family: latoBold;
+}
+
+p.dish {
+  font-size: 17px;
+  font-family: latoRegular;
+}
+
+
+p#footer-text {
+  color: var(--text1);
+}
+
+
+
+
