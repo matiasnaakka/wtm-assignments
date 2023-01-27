@@ -2,6 +2,27 @@ body {
   margin: 10%;
 }
 
-img{
-  
+#cheat-container {
+  display: flex;
+
+  align-items: center;
+  justify-content: center;
+  align-content: center;
+  flex-direction: column;
+}
+
+label {
+  font-family: sans-serif;
+  font-weight: bolder;
+  font-size: xxx-large;
+  margin: 10px;
+}
+
+img {
+  margin: 1rem;
+}
+
+input#inputValue {
+  padding: 20px;
+  font-size: xx-large;
 }

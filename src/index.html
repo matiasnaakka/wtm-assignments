@@ -4,9 +4,17 @@
     <meta charset="utf-8" />
     <title><%= htmlWebpackPlugin.options.title %></title>
     <link rel="stylesheet" href="assets/styles.css" />
+    <link rel="shortcut icon" href="#" />
   </head>
   <body>
-    <label for="input">Insert cheat code bro!</label>
-    <input id="cheatcode" type="text" />
+    <div id="cheat-container">
+      <label for="input">Insert cheat code</label>
+      <input
+        id="inputValue"
+        placeholder="Enter the cheatcode..."
+        type="text"
+        autocomplete="off"
+      />
+    </div>
   </body>
 </html>
