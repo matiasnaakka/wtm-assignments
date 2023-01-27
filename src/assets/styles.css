@@ -16,6 +16,7 @@ label {
   font-weight: bolder;
   font-size: xxx-large;
   margin: 10px;
+  box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;
 }
 
 img {
@@ -25,4 +26,26 @@ img {
 input#inputValue {
   padding: 20px;
   font-size: xx-large;
+}
+
+#coordinates {
+  position: fixed;
+  top: 2%;
+  left: 3%;
+}
+
+p {
+  font-family: system-ui;
+  font-weight: 700;
+  font-size: small;
+}
+
+#notifier {
+  position: fixed;
+  right: 2%;
+  top: 5%;
+  font-family: system-ui;
+  font-weight: 700;
+  font-size: xx-large;
+  color: rgb(255, 0, 0);
 }
