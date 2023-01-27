@@ -29,7 +29,7 @@ module.exports = {
         collapseWhitespace: true
       },
     }),
-    new ESLintPlugin({})
+    // new ESLintPlugin({})
   ],
   output: {
     filename: '[name].bundle.js',
