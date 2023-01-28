@@ -7,6 +7,8 @@ let coordinatesCntner = document.querySelector("#coordinates");
 let coordinates = document.createElement("p");
 let notifierContainer = document.querySelector("#notifier");
 let notifierText = document.createElement("p");
+let inactivenotifier = document.querySelector("#inactivenotifier");
+let idlingText = document.createElement("p");
 
 let cheatArray = [];
 
@@ -23,8 +25,8 @@ const checkCheat = () => {
     cheatContainer.append(bearHello);
   } else if (cheatArray.length > 5) {
     cheatArray = [];
-    location.reload();
     alert("wrong cheatcode.");
+    location.reload();
   }
 };
 
@@ -48,3 +50,12 @@ const timer = setTimeout(() => {
   notifierContainer.append(notifierText);
   notifierText.textContent = `Hurry up you have been here browsing for 15 seconds already!!!!`;
 }, 15000);
+
+let timeoutId;
+document.onmousemove = document.onkeydown = () => {
+  clearTimeout(timeoutId);
+  timeoutId = setTimeout(() => {
+    inactivenotifier.append(idlingText);
+    idlingText.textContent = `Hurry up you have been here browsing for 15 seconds already!!!!`;
+  }, 15000);
+};

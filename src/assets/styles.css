@@ -49,3 +49,11 @@ p {
   font-size: xx-large;
   color: rgb(255, 0, 0);
 }
+
+#inactivenotifier {
+  position: fixed;
+  right: 10%;
+  bottom: 16%;
+  font-size: -webkit-xxx-large;
+  transform: rotate(350deg);
+}
