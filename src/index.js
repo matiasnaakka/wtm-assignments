@@ -1,78 +1,88 @@
-let language = "fi";
-let sorting = "";
+import Menu from './menu.json';
+// console.log('menu from json', Menu);
 
-import Menu from "./menu.json";
-Menu.courses.map((cources) => {
-  return course.title_en;
-});
-
+// Convert Menu.courses object to array and extract title_* values only
 const coursesEn = Object.values(Menu.courses).map((course) => course.title_en);
 const coursesFi = Object.values(Menu.courses).map((course) => course.title_fi);
 
+let lang = 'fi';
+let activeMenu = coursesFi;
 
-
-console.log('dataa ja kamaa ' + Menu.courses);
-
-const enhMenuBtn = document.querySelector("#englishMenuBtn");
-const fiMenuBtn = document.querySelector("#finnishMenuBtn");
-const alphapeticalBtn = document.querySelector("#alphapeticalBtn");
-const randomDishBtn = document.querySelector("#randomDishBtn");
-
-const cources = {
-  en: [
-    "Hamburger, cream sauce and poiled potates",
-    "Goan style fish curry and whole grain rice",
-    "Vegan Chili sin carne and whole grain rice",
-    "Broccoli puree soup, side salad with two napas",
-    "Lunch baguette with BBQ-turkey filling",
-    "Cheese / Chicken / Vege / Halloum burger and french fries",
-  ],
-  fi: [
-    "Jauhelihapihvi, ruskeaa kermakastiketta ja keitettyä perunaa",
-    "Goalaista kalacurrya ja täysjyväriisiä",
-    "vegaani Chili sin carne ja täysjyväriisi",
-    "Parsakeittoa,lisäkesalaatti kahdella napaksella",
-    "Lunch baguette with BBQ-turkey filling",
-    "Juusto / Kana / Kasvis / Halloumi burgeri ja ranskalaiset",
-  ],
-};
-
-const renderMenu = () => {
-  let courcesAsHtml = cources[language].map((menu) => `<p>${menu}</p>`);
-  if (sorting === "asc") {
-    courcesAsHtml = courcesAsHtml.sort();
-  } else if (sorting === "desc") {
-    courcesAsHtml = courcesAsHtml.sort().reverse();
+/**
+ * Renders menu content to html page
+ * @param {Array} menu - array of dishes
+ */
+const renderMenu = (menu) => {
+  const menuBox = document.querySelector('.dish');
+  menuBox.innerHTML = '';
+  const list = document.createElement('ul');
+  for (const dish of menu) {
+    const li = document.createElement('li');
+    li.textContent = dish;
+    list.append(li);
   }
-  Array.from(document.querySelectorAll(".dish")).forEach(
-    (dish) => (dish.innerHTML = courcesAsHtml.join(""))
-  );
+  menuBox.append(list);
 };
 
-renderMenu();
+renderMenu(activeMenu);
 
-const englishMenu = () => {
-  language = "en";
-  renderMenu();
+/**
+ * Sorts menu alphapetically
+ * @param {Array} menu - Array of dishes
+ * @param {string} order - 'asc' or 'desc'
+ * @returns sorted menu array
+ */
+const sortMenu = (menu, order = 'asc') => {
+  // create a copy of the menu for sorting
+  // don't change the original arrays's order
+  menu = [...menu];
+  menu.sort();
+  if (order === 'desc') {
+    menu.reverse();
+  }
+  return menu;
 };
 
-const finnishMenu = () => {
-  language = "fi";
-  renderMenu();
+/**
+ * Change UI language
+ * @param {string} language
+ */
+const changeLanguage = (language) => {
+  if (language === 'fi') {
+    activeMenu = coursesFi;
+  } else if (language === 'en') {
+    activeMenu = coursesEn;
+  }
+  lang = language;
+  renderMenu(activeMenu);
 };
 
-const sortMenu = () => {
-  sorting = sorting === "asc" ? "desc" : "asc";
-  renderMenu();
+/**
+ * Get a random dish fron an array
+ * @param {Array} menu - Array of dishes
+ * @returns random dish item
+ */
+const getRandomDish = (menu) => {
+  const randomIndex = Math.floor(Math.random() * menu.length);
+  return menu[randomIndex];
 };
 
-const getRandomDish = () => {
-  let randomDish = Math.floor(Math.random() * cources[language].length);
-  alert(cources[language][randomDish]);
-  console.log(cources[language][randomDish]);
-};
-
-enhMenuBtn.addEventListener("click", englishMenu);
-fiMenuBtn.addEventListener("click", finnishMenu);
-alphapeticalBtn.addEventListener("click", sortMenu);
-randomDishBtn.addEventListener("click", getRandomDish);
+/**
+ * Buttons & event handlers
+ */
+const sortButton = document.querySelector('#sort-button');
+sortButton.addEventListener('click', () => {
+  renderMenu(sortMenu(activeMenu));
+});
+const langButton = document.querySelector('#lang-button');
+langButton.addEventListener('click', () => {
+  if (lang === 'fi') {
+    changeLanguage('en');
+  } else {
+    changeLanguage('fi');
+  }
+});
+const randButton = document.querySelector('#rand-button');
+randButton.addEventListener('click', () => {
+  alert(getRandomDish(activeMenu));
+});
