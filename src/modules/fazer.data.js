@@ -1,3 +1,9 @@
+/**
+ * Module for Fazer/Foodco menu data parsing
+ *
+ * @author mattpe <mattpe@metropolia.fi>
+ * @module Fazer
+ */
 import MenuFi from '../mock-data/fazer-week-example.json';
 import MenuEn from '../mock-data/fazer-week-example-en.json';
 

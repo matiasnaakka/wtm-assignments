@@ -1,30 +1,37 @@
+/**
+ * Main JS file
+ *
+ * @author: mattpe <mattpe@metropolia.fi>
+ * @summary: Example solution for
+ * https://github.com/mattpe/wtmp/blob/master/docs/01-javascript-basics.md#task-4---dummy-lunch-menu-2
+ */
+import Sodexo from './modules/sodexo-data';
+import Fazer from './modules/fazer.data';
+
 import Menu from './menu.json';
-// console.log('menu from json', Menu);
+console.log('menu from json',  Menu.courses);
 
-// Convert Menu.courses object to array and extract title_* values only
-const coursesEn = Object.values(Menu.courses).map((course) => course.title_en);
-const coursesFi = Object.values(Menu.courses).map((course) => course.title_fi);
-
+// Global variables
 let lang = 'fi';
-let activeMenu = coursesFi;
+let menuContainers = [];
+let activeMenus = [];
 
 /**
  * Renders menu content to html page
  * @param {Array} menu - array of dishes
  */
-const renderMenu = (menu) => {
-  const menuBox = document.querySelector('.dish');
-  menuBox.innerHTML = '';
+const renderMenu = (menu, targetElem) => {
+  const menuContainer = targetElem;
+  menuContainer.innerHTML = '';
   const list = document.createElement('ul');
   for (const dish of menu) {
     const li = document.createElement('li');
     li.textContent = dish;
     list.append(li);
   }
-  menuBox.append(list);
+  menuContainer.append(list);
 };
 
-renderMenu(activeMenu);
 
 /**
  * Sorts menu alphapetically
@@ -32,6 +39,7 @@ renderMenu(activeMenu);
  * @param {string} order - 'asc' or 'desc'
  * @returns sorted menu array
  */
+// TODO: fix for multiple menus
 const sortMenu = (menu, order = 'asc') => {
   // create a copy of the menu for sorting
   // don't change the original arrays's order
@@ -49,12 +57,17 @@ const sortMenu = (menu, order = 'asc') => {
  */
 const changeLanguage = (language) => {
   if (language === 'fi') {
-    activeMenu = coursesFi;
+    activeMenus[0] = Sodexo.coursesFi;
+    activeMenus[1] = Fazer.coursesFi;
   } else if (language === 'en') {
-    activeMenu = coursesEn;
+    activeMenus[0] = Sodexo.coursesEn;
+    activeMenus[1] = Fazer.coursesEn;
   }
   lang = language;
-  renderMenu(activeMenu);
+  // TODO: implement & use generic renderAll() function??
+  for (const [index, menu] of activeMenus.entries()) {
+    renderMenu(menu, menuContainers[index]);
+  }
 };
 
 /**
@@ -72,7 +85,7 @@ const getRandomDish = (menu) => {
  */
 const sortButton = document.querySelector('#sort-button');
 sortButton.addEventListener('click', () => {
-  renderMenu(sortMenu(activeMenu));
+  renderMenu(sortMenu(activeMenus[0]));
 });
 const langButton = document.querySelector('#lang-button');
 langButton.addEventListener('click', () => {
@@ -84,5 +97,17 @@ langButton.addEventListener('click', () => {
 });
 const randButton = document.querySelector('#rand-button');
 randButton.addEventListener('click', () => {
-  alert(getRandomDish(activeMenu));
+  alert(getRandomDish(activeMenus[0]));
 });
+
+/**
+ * App initalization
+ */
+const init = () => {
+  activeMenus = [Sodexo.coursesFi, Fazer.coursesFi];
+  menuContainers = document.querySelectorAll('.menu-container');
+  for (const [index, menu] of activeMenus.entries()) {
+    renderMenu(menu, menuContainers[index]);
+  }
+};
+init();
