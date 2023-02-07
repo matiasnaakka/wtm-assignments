@@ -1,25 +1,14 @@
-/**
- * Main JS file
- *
- * @author: mattpe <mattpe@metropolia.fi>
- * @summary: Example solution for
- * https://github.com/mattpe/wtmp/blob/master/docs/01-javascript-basics.md#task-4---dummy-lunch-menu-2
- */
+
 import Sodexo from './modules/sodexo-data';
 import Fazer from './modules/fazer.data';
-
-import Menu from './menu.json';
-console.log('menu from json',  Menu.courses);
 
 // Global variables
 let lang = 'fi';
 let menuContainers = [];
 let activeMenus = [];
 
-/**
- * Renders menu content to html page
- * @param {Array} menu - array of dishes
- */
+
+ // Renders menu content to html page
 const renderMenu = (menu, targetElem) => {
   const menuContainer = targetElem;
   menuContainer.innerHTML = '';
@@ -33,12 +22,7 @@ const renderMenu = (menu, targetElem) => {
 };
 
 
-/**
- * Sorts menu alphapetically
- * @param {Array} menu - Array of dishes
- * @param {string} order - 'asc' or 'desc'
- * @returns sorted menu array
- */
+
 // TODO: fix for multiple menus
 const sortMenu = (menu, order = 'asc') => {
   // create a copy of the menu for sorting
@@ -51,10 +35,7 @@ const sortMenu = (menu, order = 'asc') => {
   return menu;
 };
 
-/**
- * Change UI language
- * @param {string} language
- */
+
 const changeLanguage = (language) => {
   if (language === 'fi') {
     activeMenus[0] = Sodexo.coursesFi;
@@ -70,19 +51,13 @@ const changeLanguage = (language) => {
   }
 };
 
-/**
- * Get a random dish fron an array
- * @param {Array} menu - Array of dishes
- * @returns random dish item
- */
+
 const getRandomDish = (menu) => {
   const randomIndex = Math.floor(Math.random() * menu.length);
   return menu[randomIndex];
 };
 
-/**
- * Buttons & event handlers
- */
+
 const sortButton = document.querySelector('#sort-button');
 sortButton.addEventListener('click', () => {
   renderMenu(sortMenu(activeMenus[0]));
@@ -100,12 +75,10 @@ randButton.addEventListener('click', () => {
   alert(getRandomDish(activeMenus[0]));
 });
 
-/**
- * App initalization
- */
+
 const init = () => {
   activeMenus = [Sodexo.coursesFi, Fazer.coursesFi];
-  menuContainers = document.querySelectorAll('.menu-container');
+  menuContainers = document.querySelectorAll('.dish');
   for (const [index, menu] of activeMenus.entries()) {
     renderMenu(menu, menuContainers[index]);
   }

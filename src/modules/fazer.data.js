@@ -16,3 +16,5 @@ const coursesEn = MenuEn.MenusForDays[0].SetMenus.map((menuItem) =>
 
 const Fazer = {coursesEn, coursesFi};
 export default Fazer;
+
+
