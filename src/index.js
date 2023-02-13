@@ -33,9 +33,14 @@ const renderMenu = (menu, targetElem) => {
  * Change UI language
  * @param {string} language
  */
-const changeLanguage = async (language) => {
-  activeMenus[0] = await Sodexo.getDailyMenu(language);
-  activeMenus[1] = await Fazer.getDailyMenu(language);
+const changeLanguage = (language) => {
+  if (language === 'fi') {
+    activeMenus[0] = Sodexo.coursesFi;
+    activeMenus[1] = Fazer.coursesFi;
+  } else if (language === 'en') {
+    activeMenus[0] = Sodexo.coursesEn;
+    activeMenus[1] = Fazer.coursesEn;
+  }
   lang = language;
   // TODO: implement & use generic renderAll() function??
   for (const [index, menu] of activeMenus.entries()) {
@@ -58,15 +63,14 @@ langButton.addEventListener('click', () => {
 /**
  * App initalization
  */
-const init = async () => {
-  activeMenus = [await Sodexo.getDailyMenu(lang), await Fazer.getDailyMenu(lang)];
+const init = () => {
+  activeMenus = [Sodexo.coursesFi, Fazer.coursesFi];
   menuContainers = document.querySelectorAll('.menu-container');
   for (const [index, menu] of activeMenus.entries()) {
     renderMenu(menu, menuContainers[index]);
   }
 };
 init();
-
 
 // TODO: wrap to function / move to separate module
 // eslint-disable-next-line no-undef
@@ -79,6 +83,3 @@ if (APP_CONF.productionMode && 'serviceWorker' in navigator) {
     });
   });
 }
-
-import { dofetch } from './modules/network';
-const menuData = dofetch('https://www.sodexo.fi/ruokalistat/output/weekly_json/152');
